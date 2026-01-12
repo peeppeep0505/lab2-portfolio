@@ -4,6 +4,8 @@ import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home";
 import Projects from "./pages/Projects";
 import Contact from "./pages/Contact";
+import Catalog from "./pages/Catalog";
+import ProductDetail from "./pages/ProductDetail";
 
 function App() {
   return (
@@ -11,9 +13,11 @@ function App() {
       <ThemeProvider> 
         <Routes> 
           <Route path="/" element={<MainLayout />}> 
-            <Route index element={<Home />} /> 
+            <Route index element={<Catalog />} /> 
+            <Route path="home" element={<Home />} /> 
             <Route path="projects" element={<Projects />} /> 
             <Route path="contact" element={<Contact />} /> 
+            <Route path="product/:id" element={<ProductDetail />} />
           </Route>
         </Routes>
       </ThemeProvider>

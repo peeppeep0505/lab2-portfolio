@@ -9,7 +9,8 @@ const MainLayout = () => {
       <nav className="p-4 flex justify-between items-center border-b dark:border-gray-700"> 
         <h1 className="text-xl font-bold">MyPortfolio</h1> 
         <div className="space-x-4 flex items-center"> 
-          <Link to="/" className="hover:text-blue-500">Home</Link> 
+          <Link to="/" className="hover:text-blue-500">Catalog</Link> 
+          <Link to="/home" className="hover:text-blue-500">Home</Link> 
           <Link to="/projects" className="hover:text-blue-500">Projects</Link> 
           <Link to="/contact" className="hover:text-blue-500">Contact</Link> 
           <button onClick={toggleTheme} className="p-2 bg-gray-200 dark:bg-gray-700 rounded-full"> 

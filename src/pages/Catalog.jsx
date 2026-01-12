@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { products } from "../data/products";
+import ProductCard from "../components/ProductCard";
 
 const Catalog = () => {
   const [search, setSearch] = useState("");
 
-  // Logic สำหรับการกรองสินค้าตามชื่อแบบ Case-insensitive
   const filteredProducts = products.filter((p) =>
     p.name.toLowerCase().includes(search.toLowerCase())
   );
@@ -18,23 +17,14 @@ const Catalog = () => {
       <input
         type="text"
         placeholder="Search products..."
-        className="w-full p-3 border rounded-lg mb-8 focus:ring-2 focus:ring-blue-500 outline-none"
+        className="w-full p-3 border rounded-lg mb-8 focus:ring-2 focus:ring-blue-500 outline-none dark:bg-gray-800 dark:border-gray-600"
         onChange={(e) => setSearch(e.target.value)} 
       />
 
-      {/* แสดงรายการสินค้าแบบ Grid 129, 185] */}
+      {/* แสดงรายการสินค้าแบบ Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {filteredProducts.map((product) => (
-          <div key={product.id} className="p-4 border rounded-xl hover:shadow-lg transition"> 
-            <h2 className="text-xl font-semibold">{product.name}</h2>
-            <p className="text-gray-500">{product.price} THB</p>
-            <Link
-              to={`/product/${product.id}`} 
-              className="mt-3 inline-block text-blue-600 font-medium hover:underline"
-            >
-              View Details → 
-            </Link>
-          </div>
+          <ProductCard key={product.id} product={product} />
         ))}
       </div>
     </div>

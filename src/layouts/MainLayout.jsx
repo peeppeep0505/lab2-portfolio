@@ -1,8 +1,13 @@
+import { useState } from "react";
 import { Link, Outlet } from "react-router-dom"; 
-import { useTheme } from "../context/ThemeContext"; 
+import { useTheme } from "../context/ThemeContext";
+import { useCartStore } from "../store/useCartStore";
+import CartDrawer from "../components/CartDrawer";
 
 const MainLayout = () => {
-  const { darkMode, toggleTheme } = useTheme(); 
+  const { darkMode, toggleTheme } = useTheme();
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const cartCount = useCartStore((state) => state.cart.length);
 
   return (
     <div className="min-h-screen transition-colors duration-300 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"> 
@@ -16,11 +21,23 @@ const MainLayout = () => {
           <button onClick={toggleTheme} className="p-2 bg-gray-200 dark:bg-gray-700 rounded-full"> 
             {darkMode ? "☀️ Light" : "🌙 Dark"} 
           </button>
+          <button 
+            onClick={() => setIsCartOpen(true)}
+            className="relative p-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition"
+          >
+            🛒
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center">
+                {cartCount}
+              </span>
+            )}
+          </button>
         </div>
       </nav>
       <main className="p-8"> 
-        <Outlet /> {/* เนื้อหาจากหน้าที่เรากดเลือกจะมาแสดงตรงนี้ */} 
+        <Outlet />
       </main>
+      <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </div>
   );
 };

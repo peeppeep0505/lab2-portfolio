@@ -17,7 +17,8 @@ const MainLayout = () => {
           <Link to="/" className="hover:text-blue-500">Catalog</Link> 
           <Link to="/home" className="hover:text-blue-500">Home</Link> 
           <Link to="/projects" className="hover:text-blue-500">Projects</Link> 
-          <Link to="/contact" className="hover:text-blue-500">Contact</Link> 
+          <Link to="/contact" className="hover:text-blue-500">Contact</Link>
+          <Link to="/apply/step-1" className="hover:text-blue-500">Apply Job</Link>
           <button onClick={toggleTheme} className="p-2 bg-gray-200 dark:bg-gray-700 rounded-full"> 
             {darkMode ? "☀️ Light" : "🌙 Dark"} 
           </button>

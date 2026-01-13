@@ -2,12 +2,14 @@ import { useState } from "react";
 import { Link, Outlet } from "react-router-dom"; 
 import { useTheme } from "../context/ThemeContext";
 import { useCartStore } from "../store/useCartStore";
+import { useAuthStore } from "../store/useAuthStore";
 import CartDrawer from "../components/CartDrawer";
 
 const MainLayout = () => {
   const { darkMode, toggleTheme } = useTheme();
   const [isCartOpen, setIsCartOpen] = useState(false);
   const cartCount = useCartStore((state) => state.cart.length);
+  const user = useAuthStore((state) => state.user);
 
   return (
     <div className="min-h-screen transition-colors duration-300 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"> 
@@ -19,6 +21,21 @@ const MainLayout = () => {
           <Link to="/projects" className="hover:text-blue-500">Projects</Link> 
           <Link to="/contact" className="hover:text-blue-500">Contact</Link>
           <Link to="/apply/step-1" className="hover:text-blue-500">Apply Job</Link>
+          
+          {/* แสดง Dashboard link เฉพาะเมื่อ Login แล้ว */}
+          {user && (
+            <Link to="/dashboard" className="hover:text-blue-500 font-semibold">
+              📊 Dashboard
+            </Link>
+          )}
+          
+          {/* แสดง Login link เมื่อยังไม่ Login */}
+          {!user && (
+            <Link to="/login" className="px-3 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+              🔐 Login
+            </Link>
+          )}
+          
           <button onClick={toggleTheme} className="p-2 bg-gray-200 dark:bg-gray-700 rounded-full"> 
             {darkMode ? "☀️ Light" : "🌙 Dark"} 
           </button>
